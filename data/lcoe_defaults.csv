@@ -1,0 +1,10 @@
+Province,Technology,CapEx,FixedOM,FCR,CapacityFactor,VarOM,FuelCost,Source,LCOE
+ON,Solar,1866,31,0.0611,0.24,0,0,IESO 2024 (sourced),68.9747907153729
+ON,Wind,1824,43,0.064,0.38,0,0,IESO 2024 (sourced),47.9860610430185
+ON,Natural Gas,1645,46,0.0653,0.12,3,36,IESO 2024 (sourced),184.9460616438356
+NS,Solar,1866,31,0.0611,0.14,0,0,CF estimated (Atlantic latitude/cloud cover),118.2424983692107
+NS,Wind,1824,43,0.064,0.38,0,0,CF estimated (strong NS coastal wind resource),47.9860610430185
+NS,Natural Gas,1645,46,0.0653,0.45,3,36,CF estimated (gas runs more baseload-like than in ON),77.9189497716895
+AB,Solar,1866,31,0.0611,0.21,0,0,CF estimated (stronger southern AB solar resource),78.82833224614048
+AB,Wind,1824,43,0.064,0.37,0,0,CF estimated (strong southern AB wind resource),49.28298161174874
+AB,Natural Gas,1645,46,0.0653,0.55,3,36,CF estimated (gas is a major AB baseload resource),70.84277708592776
