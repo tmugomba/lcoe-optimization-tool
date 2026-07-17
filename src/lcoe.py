@@ -13,10 +13,6 @@ import plotly.graph_objects as go
 
 
 def capital_recovery_factor(discount_rate: float, project_life: int) -> float:
-    """
-    Converts a discount rate + project life into a Capital Recovery Factor (CRF) —
-    the standard way to annualize a lump-sum capital cost over a project's lifetime.
-    """
     r = discount_rate
     n = project_life
     return (r * (1 + r) ** n) / ((1 + r) ** n - 1)
@@ -24,31 +20,6 @@ def capital_recovery_factor(discount_rate: float, project_life: int) -> float:
 
 def calculate_lcoe(capex: float, discount_rate: float, project_life: int, fixed_om: float,
                     capacity_factor: float, variable_om: float = 0, fuel_cost: float = 0) -> float:
-    """
-    Calculates the Levelized Cost of Energy in $/MWh.
-
-    Parameters
-    ----------
-    capex : float
-        Capital expenditure, $/kW
-    discount_rate : float
-        Real discount rate, as a decimal (e.g. 0.04 for 4%)
-    project_life : int
-        Project lifetime in years
-    fixed_om : float
-        Fixed O&M cost, $/kW/yr
-    capacity_factor : float
-        Capacity factor, as a decimal (e.g. 0.38 for 38%)
-    variable_om : float, optional
-        Variable O&M cost, $/MWh (default 0)
-    fuel_cost : float, optional
-        Fuel cost, $/MWh (default 0 — zero for solar/wind)
-
-    Returns
-    -------
-    float
-        LCOE in $/MWh
-    """
     crf = capital_recovery_factor(discount_rate, project_life)
     aep_net_per_kw = (capacity_factor * 8760) / 1000
     lcoe = (capex * crf + fixed_om) / aep_net_per_kw + variable_om + fuel_cost
@@ -56,15 +27,6 @@ def calculate_lcoe(capex: float, discount_rate: float, project_life: int, fixed_
 
 
 def build_param_ranges(base_row: pd.Series) -> dict:
-    """
-    Builds +/- sensitivity ranges for each parameter, based on the bands
-    validated in Notebook 2. Fuel cost sensitivity only included for
-    technologies that actually have a fuel cost (i.e. natural gas).
-
-    Note: capacity factor uses a flat +/-5 percentage point range, which is a
-    known limitation for low-capacity-factor technologies (see Notebook 2
-    findings on Ontario Gas) — a future refinement could use relative ranges.
-    """
     ranges = {
         "CapEx": (base_row["CapEx"] * 0.85, base_row["CapEx"] * 1.15),
         "FixedOM": (base_row["FixedOM"] * 0.70, base_row["FixedOM"] * 1.30),
@@ -78,22 +40,11 @@ def build_param_ranges(base_row: pd.Series) -> dict:
 
 
 def sensitivity_analysis(base_row: pd.Series, param_ranges: dict) -> pd.DataFrame:
-    """
-    Varies each parameter in param_ranges one at a time (holding all others
-    at their default value) and records the resulting low/high LCOE — the
-    core data behind a tornado chart.
-
-    Returns
-    -------
-    pd.DataFrame indexed by Parameter, with columns Low, High, Swing —
-    sorted ascending by Swing (biggest swing last, for tornado plotting order).
-    """
     results = []
     arg_map = {
         "CapEx": "capex", "FixedOM": "fixed_om", "CapacityFactor": "capacity_factor",
         "DiscountRate": "discount_rate", "ProjectLife": "project_life", "FuelCost": "fuel_cost"
     }
-
     for param, (low_val, high_val) in param_ranges.items():
         for label, val in [("Low", low_val), ("High", high_val)]:
             test_params = {
@@ -116,11 +67,13 @@ def sensitivity_analysis(base_row: pd.Series, param_ranges: dict) -> pd.DataFram
 
 
 def plot_tornado(tornado_data: pd.DataFrame, technology_name: str, base_lcoe: float,
-                  x_range: tuple = None) -> go.Figure:
+                  x_range: tuple = None, label_color: str = "#1a1a1a",
+                  bar_color: str = "#2E5EAA", bar_line_color: str = "#1a3a6e") -> go.Figure:
     """
-    Builds an interactive Plotly tornado chart. Returns the figure object
-    (caller decides whether to .show() it in a notebook or st.plotly_chart()
-    it in the Streamlit app).
+    label_color, bar_color, bar_line_color are themeable so the same function
+    reads correctly on both a light background (notebooks) and a dark
+    background (the Streamlit app) — a fixed dark label color was previously
+    nearly invisible against the app's dark theme.
     """
     data = tornado_data.sort_values("Swing", ascending=True)
     fig = go.Figure()
@@ -129,31 +82,34 @@ def plot_tornado(tornado_data: pd.DataFrame, technology_name: str, base_lcoe: fl
         low, high = row["Low"], row["High"]
         fig.add_trace(go.Bar(
             y=[param], x=[high - low], base=[low], orientation="h",
-            marker=dict(color="#2E5EAA", line=dict(color="#1a3a6e", width=1)),
+            marker=dict(color=bar_color, line=dict(color=bar_line_color, width=1)),
             hovertemplate=f"<b>{param}</b><br>Low: ${low:.1f}/MWh<br>High: ${high:.1f}/MWh<br>Swing: ${row['Swing']:.1f}/MWh<extra></extra>",
             showlegend=False
         ))
         fig.add_annotation(x=low, y=param, text=f"${low:.0f}", showarrow=False,
-                            xanchor="right", xshift=-10, font=dict(size=11, color="#1a1a1a"))
+                            xanchor="right", xshift=-12, font=dict(size=12, color=label_color))
         fig.add_annotation(x=high, y=param, text=f"${high:.0f}", showarrow=False,
-                            xanchor="left", xshift=10, font=dict(size=11, color="#1a1a1a"))
+                            xanchor="left", xshift=12, font=dict(size=12, color=label_color))
 
     fig.add_vline(x=base_lcoe, line_dash="dash", line_color="#F2B705", line_width=2,
-                   annotation_text=f"Base LCOE = ${base_lcoe:.0f}/MWh", annotation_position="top")
+                   annotation_text=f"Base LCOE = ${base_lcoe:.0f}/MWh", annotation_position="top",
+                   annotation_font=dict(color=label_color))
 
     if x_range is not None:
         final_range = x_range
     else:
+        # Wider padding than before (18%, up from 8%) so labels never crowd
+        # the plot edges, especially for parameters with large swings
         x_min, x_max = data["Low"].min(), data["High"].max()
-        padding = (x_max - x_min) * 0.08
+        padding = (x_max - x_min) * 0.18
         final_range = [x_min - padding, x_max + padding]
 
     fig.update_layout(
         title=f"Sensitivity Analysis — {technology_name}",
         xaxis_title="LCOE ($/MWh)",
-        xaxis=dict(gridcolor="#e5e5e5", range=final_range),
-        height=450,
-        margin=dict(l=10, r=10, t=60, b=10),
+        xaxis=dict(gridcolor="#e5e5e5", range=final_range, automargin=True),
+        height=420,
+        margin=dict(l=40, r=40, t=60, b=10),
         plot_bgcolor="white",
         bargap=0.35
     )
@@ -161,5 +117,4 @@ def plot_tornado(tornado_data: pd.DataFrame, technology_name: str, base_lcoe: fl
 
 
 def load_defaults(path: str = "data/lcoe_defaults.csv") -> pd.DataFrame:
-    """Loads the validated province x technology default parameter table."""
     return pd.read_csv(path)
