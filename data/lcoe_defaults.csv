@@ -1,10 +1,10 @@
-Province,Technology,CapEx,FixedOM,FCR,CapacityFactor,VarOM,FuelCost,Source,LCOE
-ON,Solar,1866,31,0.0611,0.24,0,0,IESO 2024 (sourced),68.9747907153729
-ON,Wind,1824,43,0.064,0.38,0,0,IESO 2024 (sourced),47.9860610430185
-ON,Natural Gas,1645,46,0.0653,0.12,3,36,IESO 2024 (sourced),184.9460616438356
-NS,Solar,1866,31,0.0611,0.14,0,0,CF estimated (Atlantic latitude/cloud cover),118.2424983692107
-NS,Wind,1824,43,0.064,0.38,0,0,CF estimated (strong NS coastal wind resource),47.9860610430185
-NS,Natural Gas,1645,46,0.0653,0.45,3,36,CF estimated (gas runs more baseload-like than in ON),77.9189497716895
-AB,Solar,1866,31,0.0611,0.21,0,0,CF estimated (stronger southern AB solar resource),78.82833224614048
-AB,Wind,1824,43,0.064,0.37,0,0,CF estimated (strong southern AB wind resource),49.28298161174874
-AB,Natural Gas,1645,46,0.0653,0.55,3,36,CF estimated (gas is a major AB baseload resource),70.84277708592776
+Province,Technology,CapEx,FixedOM,FCR,CapacityFactor,VarOM,FuelCost,Source,LCOE,DiscountRate,ProjectLife,LCOE_v2
+ON,Solar,1866,31,0.0611,0.24,0,0,IESO 2024 (sourced),68.9747907153729,0.0356,25,68.9479792528397
+ON,Wind,1824,43,0.064,0.38,0,0,IESO 2024 (sourced),47.9860610430185,0.04,25,47.99261599450047
+ON,Natural Gas,1645,46,0.0653,0.12,3,36,IESO 2024 (sourced),184.9460616438356,0.0419,25,184.95215598146865
+NS,Solar,1866,31,0.0611,0.14,0,0,CF estimated (Atlantic latitude/cloud cover),118.2424983692107,0.0356,25,118.19653586201092
+NS,Wind,1824,43,0.064,0.38,0,0,CF estimated (strong NS coastal wind resource),47.9860610430185,0.04,25,47.99261599450047
+NS,Natural Gas,1645,46,0.0653,0.45,3,36,CF estimated (gas runs more baseload-like than in ON),77.9189497716895,0.0419,25,77.92057492839164
+AB,Solar,1866,31,0.0611,0.21,0,0,CF estimated (stronger southern AB solar resource),78.82833224614048,0.0356,25,78.79769057467396
+AB,Wind,1824,43,0.064,0.37,0,0,CF estimated (strong southern AB wind resource),49.28298161174874,0.04,25,49.28971372408157
+AB,Natural Gas,1645,46,0.0653,0.55,3,36,CF estimated (gas is a major AB baseload resource),70.84277708592776,0.0419,25,70.84410675959316
