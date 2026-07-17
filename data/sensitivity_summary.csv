@@ -1,0 +1,10 @@
+Combination,Province,Technology,Base_LCOE,Most_Sensitive_To,Max_Swing
+ON_Solar,ON,Solar,68.9,CapacityFactor,30.0
+ON_Wind,ON,Wind,48.0,CapacityFactor,12.9
+ON_NaturalGas,ON,Natural Gas,185.0,CapacityFactor,147.2
+NS_Solar,NS,Solar,118.2,CapacityFactor,96.8
+NS_Wind,NS,Wind,48.0,CapacityFactor,12.9
+NS_NaturalGas,NS,Natural Gas,77.9,FuelCost,28.8
+AB_Solar,AB,Solar,78.8,CapacityFactor,39.8
+AB_Wind,AB,Wind,49.3,CapacityFactor,13.6
+AB_NaturalGas,AB,Natural Gas,70.8,FuelCost,28.8
