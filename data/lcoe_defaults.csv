@@ -1,31 +1,10 @@
-Province,Technology,CapEx,FixedOM,DiscountRate,ProjectLife,CapacityFactor,VarOM,FuelCost,Source,LCOE
-ON,Solar,1866,31,0.0356,25,0.24,0,0,IESO 2024 (sourced),68.9479792528397
-ON,Wind,1824,43,0.04,25,0.38,0,0,IESO 2024 (sourced),47.99261599450047
-ON,Natural Gas,1645,46,0.0419,25,0.12,3,36,IESO 2024 (sourced),184.95215598146865
-NS,Solar,1866,31,0.0356,25,0.14,0,0,CF estimated (Atlantic cloud cover),118.19653586201092
-NS,Wind,1824,43,0.04,25,0.38,0,0,CF estimated (strong NS coastal wind),47.99261599450047
-NS,Natural Gas,1645,46,0.0419,25,0.45,3,36,"CF estimated (fossil-heavy grid, baseload-like)",77.92057492839164
-AB,Solar,1388,31,0.0356,25,0.21,0,0,AESO 2024 Long-Term Outlook (sourced CapEx; capacity factor estimated),62.92937110223419
-AB,Wind,1105,43,0.04,25,0.37,0,0,AESO 2024 Long-Term Outlook (sourced CapEx; capacity factor estimated),35.08984909262999
-AB,Natural Gas,1667,46,0.0419,25,0.55,3,36,AESO 2024 Long-Term Outlook (sourced CapEx; capacity factor estimated),71.1422980584446
-BC,Solar,1866,31,0.0356,25,0.19,0,0,BC Hydro 2024 Power Call (sourced),87.09218431937647
-BC,Wind,1824,43,0.04,25,0.36,0,0,BC Hydro 2024 Power Call (sourced),50.658872438639385
-BC,Natural Gas,1645,46,0.0419,25,0.15,3,36,"CF estimated (hydro-dominant grid, gas rarely used)",155.76172478517492
-SK,Solar,1866,31,0.0356,25,0.25,0,0,CF estimated (highest sunshine hours in Canada),66.19006008272612
-SK,Wind,1824,43,0.04,25,0.37,0,0,CF estimated (strong prairie wind resource),49.28971372408157
-SK,Natural Gas,1645,46,0.0419,25,0.5,3,36,"CF estimated (significant gas reliance, coal phase-out)",74.02851743555249
-MB,Solar,1866,31,0.0356,25,0.23,0,0,CF estimated (strong southern prairie solar resource),71.94571748122405
-MB,Wind,1824,43,0.04,25,0.35,0,0,CF estimated (moderate-strong prairie wind),52.106268794029084
-MB,Natural Gas,1645,46,0.0419,25,0.2,3,36,"CF estimated (hydro-dominant grid, gas rarely used)",126.5712935888812
-QC,Solar,1866,31,0.0356,25,0.18,0,0,"CF estimated (northern latitude, moderate cloud cover)",91.93063900378628
-QC,Wind,1824,43,0.04,25,0.33,0,0,"CF estimated (Gaspe corridor strong, provincial avg moderate)",55.26422447851569
-QC,Natural Gas,1645,46,0.0419,25,0.1,3,36,CF estimated (overwhelmingly hydro-powered grid),214.1425871777624
-NB,Solar,1866,31,0.0356,25,0.15,0,0,CF estimated (Atlantic cloud cover),110.31676680454353
-NB,Wind,1824,43,0.04,25,0.36,0,0,CF estimated (coastal Atlantic wind resource),50.658872438639385
-NB,Natural Gas,1645,46,0.0419,25,0.3,3,36,CF estimated (mixed nuclear/hydro/gas grid),97.38086239258746
-PE,Solar,1866,31,0.0356,25,0.15,0,0,CF estimated (Atlantic cloud cover),110.31676680454353
-PE,Wind,1824,43,0.04,25,0.4,0,0,CF estimated (among the strongest wind resources in Canada),45.59298519477545
-PE,Natural Gas,1645,46,0.0419,25,0.2,3,36,"CF estimated (minimal own generation, imports most power)",126.5712935888812
-NL,Solar,1866,31,0.0356,25,0.12,0,0,"CF estimated (cloudiest province, northern latitude)",137.8959585056794
-NL,Wind,1824,43,0.04,25,0.38,0,0,CF estimated (strong exposed Atlantic wind resource),47.99261599450047
-NL,Natural Gas,1645,46,0.0419,25,0.2,3,36,"CF estimated (hydro-dominant grid, gas/diesel peaking)",126.5712935888812
+Province,Technology,CapEx,FixedOM,FCR,CapacityFactor,VarOM,FuelCost,Source,LCOE
+ON,Solar,1866,31,0.0611,0.24,0,0,IESO 2024 (sourced),68.9747907153729
+ON,Wind,1824,43,0.064,0.38,0,0,IESO 2024 (sourced),47.9860610430185
+ON,Natural Gas,1645,46,0.0653,0.12,3,36,IESO 2024 (sourced),184.9460616438356
+NS,Solar,1866,31,0.0611,0.14,0,0,CF estimated (Atlantic latitude/cloud cover),118.2424983692107
+NS,Wind,1824,43,0.064,0.38,0,0,CF estimated (strong NS coastal wind resource),47.9860610430185
+NS,Natural Gas,1645,46,0.0653,0.45,3,36,CF estimated (gas runs more baseload-like than in ON),77.9189497716895
+AB,Solar,1866,31,0.0611,0.21,0,0,CF estimated (stronger southern AB solar resource),78.82833224614048
+AB,Wind,1824,43,0.064,0.37,0,0,CF estimated (strong southern AB wind resource),49.28298161174874
+AB,Natural Gas,1645,46,0.0653,0.55,3,36,CF estimated (gas is a major AB baseload resource),70.84277708592776
