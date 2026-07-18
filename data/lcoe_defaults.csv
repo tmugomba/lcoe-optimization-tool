@@ -5,11 +5,11 @@ ON,Natural Gas,1645,46,0.0419,25,0.12,3,36,IESO 2024 (sourced),184.9521559814686
 NS,Solar,1866,31,0.0356,25,0.14,0,0,CF estimated (Atlantic cloud cover),118.19653586201092
 NS,Wind,1824,43,0.04,25,0.38,0,0,CF estimated (strong NS coastal wind),47.99261599450047
 NS,Natural Gas,1645,46,0.0419,25,0.45,3,36,"CF estimated (fossil-heavy grid, baseload-like)",77.92057492839164
-AB,Solar,1866,31,0.0356,25,0.21,0,0,CF estimated (strong southern AB solar resource),78.79769057467396
-AB,Wind,1824,43,0.04,25,0.37,0,0,CF estimated (strong southern AB wind resource),49.28971372408157
-AB,Natural Gas,1645,46,0.0419,25,0.55,3,36,CF estimated (gas-dominant deregulated market),70.84410675959316
-BC,Solar,1866,31,0.0356,25,0.16,0,0,CF estimated (rainy coast-dominated climate),103.42196887925955
-BC,Wind,1824,43,0.04,25,0.28,0,0,"CF estimated (mountainous, less consistent wind)",65.13283599253634
+AB,Solar,1388,31,0.0356,25,0.21,0,0,AESO 2024 Long-Term Outlook (sourced CapEx; capacity factor estimated),62.92937110223419
+AB,Wind,1105,43,0.04,25,0.37,0,0,AESO 2024 Long-Term Outlook (sourced CapEx; capacity factor estimated),35.08984909262999
+AB,Natural Gas,1667,46,0.0419,25,0.55,3,36,AESO 2024 Long-Term Outlook (sourced CapEx; capacity factor estimated),71.1422980584446
+BC,Solar,1866,31,0.0356,25,0.19,0,0,BC Hydro 2024 Power Call (sourced),87.09218431937647
+BC,Wind,1824,43,0.04,25,0.36,0,0,BC Hydro 2024 Power Call (sourced),50.658872438639385
 BC,Natural Gas,1645,46,0.0419,25,0.15,3,36,"CF estimated (hydro-dominant grid, gas rarely used)",155.76172478517492
 SK,Solar,1866,31,0.0356,25,0.25,0,0,CF estimated (highest sunshine hours in Canada),66.19006008272612
 SK,Wind,1824,43,0.04,25,0.37,0,0,CF estimated (strong prairie wind resource),49.28971372408157

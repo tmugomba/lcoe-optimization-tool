@@ -223,6 +223,23 @@ PROVINCE_NAMES = {
     "MB": "Manitoba", "SK": "Saskatchewan", "NS": "Nova Scotia",
     "NB": "New Brunswick", "NL": "Newfoundland and Labrador", "PE": "Prince Edward Island"
 }
+
+# Short, plain-English grid context per province — explains WHY natural gas in
+# particular looks cheap or expensive here, since that's driven entirely by
+# each province's actual generation mix, not the technology itself
+PROVINCE_CONTEXT = {
+    "ON": "Ontario's grid leans on nuclear and hydro for baseload, so gas mostly fills in during peak demand — that low utilization is exactly why gas looks expensive here despite modest capital costs.",
+    "QC": "Quebec runs on abundant hydro power, so gas plants barely get used — driving gas's cost per MWh way up, since the same fixed costs get spread across very little actual generation.",
+    "BC": "Like Quebec, BC's grid is hydro-dominant, so gas plays a minimal role — making it the most expensive option here for the same reason: low utilization inflates cost per unit of energy.",
+    "AB": "Alberta's deregulated market and gas-heavy grid means gas plants run far more often than in hydro-rich provinces, keeping gas genuinely competitive — while Alberta's mature renewable market also delivers some of the lowest wind/solar capital costs in the country.",
+    "MB": "Manitoba's grid is hydro-dominant like Quebec and BC, so gas is a minor player here too — used sparingly, which keeps its cost per MWh high relative to its capital cost.",
+    "SK": "Saskatchewan relies more heavily on natural gas as coal is phased out, giving it one of the highest gas capacity factors in this comparison — and it also has Canada's strongest solar resource.",
+    "NS": "Nova Scotia's grid has historically leaned on fossil generation, so gas runs closer to baseload here than in hydro-rich provinces — while its Atlantic coastline gives it strong, consistent wind resources.",
+    "NB": "New Brunswick's mixed grid (nuclear, hydro, and gas) puts gas in a moderate role — not a peaker like Ontario, not baseload like Alberta.",
+    "NL": "Newfoundland and Labrador leans on hydro (Churchill Falls) with gas/diesel filling gaps — while its exposed Atlantic location gives it a strong wind resource.",
+    "PE": "PEI generates very little of its own power, importing most electricity from New Brunswick — but its wind resource is among the strongest in Canada.",
+}
+
 TECH_ICONS = {"Solar": SOLAR_ICON, "Wind": WIND_ICON, "Natural Gas": GAS_ICON}
 TECH_COLORS = {"Solar": "#F2B705", "Wind": "#2DD4BF", "Natural Gas": "#E8622C"}
 
@@ -317,6 +334,8 @@ for col, tech in zip(card_cols, ["Solar", "Wind", "Natural Gas"]):
         </div>
         """, unsafe_allow_html=True)
 
+st.caption(f"💡 {PROVINCE_CONTEXT.get(province_code, '')}")
+
 st.markdown('<div class="transmission-line"></div>', unsafe_allow_html=True)
 
 # ---------------------------------------------------------------
@@ -333,10 +352,38 @@ technology = st.radio("Technology", options=["Solar", "Wind", "Natural Gas"], ho
                        help="Select a technology to adjust its parameters below.")
 
 base_row = province_rows.loc[technology]
-is_sourced = base_row["Source"].startswith("IESO")
+is_sourced = base_row["Source"].startswith("IESO") or base_row["Source"].startswith("AESO")
 tag_class = "source-sourced" if is_sourced else "source-estimated"
-tag_text = "IESO 2024 — Sourced" if is_sourced else "Regionally Estimated"
+tag_text = "Officially Sourced" if is_sourced else "Regionally Estimated"
 st.markdown(f'<span class="source-tag {tag_class}">{tag_text}</span>', unsafe_allow_html=True)
+
+# --- "Why this number?" insight box ---
+# Reuses the reasoning already captured in the Source column, reworded into a
+# plain-English explanation rather than a citation, plus a comparative note
+# on how this technology stacks up against the other two in the same province.
+cheapest_tech = province_rows["LCOE"].idxmin()
+priciest_tech = province_rows["LCOE"].idxmax()
+
+if technology == cheapest_tech:
+    rank_note = f"This is the **cheapest** option in {PROVINCE_NAMES[province_code]} among the three technologies compared here."
+elif technology == priciest_tech:
+    rank_note = f"This is the **most expensive** option in {PROVINCE_NAMES[province_code]} among the three technologies compared here."
+else:
+    rank_note = f"This sits in the middle of the three technologies compared for {PROVINCE_NAMES[province_code]}."
+
+# Strip the citation-style prefix from the Source text to read as a plain explanation
+reasoning_text = base_row["Source"]
+for prefix in ["IESO 2024 (sourced)", "AESO 2024 Long-Term Outlook (sourced CapEx; capacity factor estimated)",
+               "CF estimated (", "IESO 2024"]:
+    if reasoning_text.startswith(prefix):
+        reasoning_text = reasoning_text.replace(prefix, "").strip(" ()")
+        break
+
+insight_text = f"💡 **Why this number?** {rank_note}"
+if reasoning_text:
+    insight_text += f" Capacity factor here reflects: *{reasoning_text}*."
+
+st.info(insight_text, icon=None)
 
 col1, col2 = st.columns(2)
 with col1:
