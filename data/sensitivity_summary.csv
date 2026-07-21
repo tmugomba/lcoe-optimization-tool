@@ -2,9 +2,30 @@ Combination,Province,Technology,Base_LCOE,Most_Sensitive_To,Max_Swing
 ON_Solar,ON,Solar,68.9,CapacityFactor,30.0
 ON_Wind,ON,Wind,48.0,CapacityFactor,12.9
 ON_NaturalGas,ON,Natural Gas,185.0,CapacityFactor,147.2
+AB_Solar,AB,Solar,62.9,CapacityFactor,31.8
+AB_Wind,AB,Wind,35.1,CapacityFactor,9.7
+AB_NaturalGas,AB,Natural Gas,71.1,FuelCost,28.8
 NS_Solar,NS,Solar,118.2,CapacityFactor,96.8
 NS_Wind,NS,Wind,48.0,CapacityFactor,12.9
 NS_NaturalGas,NS,Natural Gas,77.9,FuelCost,28.8
-AB_Solar,AB,Solar,78.8,CapacityFactor,39.8
-AB_Wind,AB,Wind,49.3,CapacityFactor,13.6
-AB_NaturalGas,AB,Natural Gas,70.8,FuelCost,28.8
+BC_Solar,BC,Solar,103.4,CapacityFactor,71.6
+BC_Wind,BC,Wind,65.1,CapacityFactor,24.0
+BC_NaturalGas,BC,Natural Gas,155.8,CapacityFactor,87.6
+SK_Solar,SK,Solar,66.2,CapacityFactor,27.6
+SK_Wind,SK,Wind,49.3,CapacityFactor,13.6
+SK_NaturalGas,SK,Natural Gas,74.0,FuelCost,28.8
+MB_Solar,MB,Solar,71.9,CapacityFactor,32.8
+MB_Wind,MB,Wind,52.1,CapacityFactor,15.2
+MB_NaturalGas,MB,Natural Gas,126.6,CapacityFactor,46.7
+QC_Solar,QC,Solar,91.9,CapacityFactor,55.3
+QC_Wind,QC,Wind,55.3,CapacityFactor,17.1
+QC_NaturalGas,QC,Natural Gas,214.1,CapacityFactor,233.5
+NB_Solar,NB,Solar,110.3,CapacityFactor,82.7
+NB_Wind,NB,Wind,50.7,CapacityFactor,14.3
+NB_NaturalGas,NB,Natural Gas,97.4,FuelCost,28.8
+PE_Solar,PE,Solar,110.3,CapacityFactor,82.7
+PE_Wind,PE,Wind,45.6,CapacityFactor,11.6
+PE_NaturalGas,PE,Natural Gas,126.6,CapacityFactor,46.7
+NL_Solar,NL,Solar,137.9,CapacityFactor,139.1
+NL_Wind,NL,Wind,48.0,CapacityFactor,12.9
+NL_NaturalGas,NL,Natural Gas,126.6,CapacityFactor,46.7
