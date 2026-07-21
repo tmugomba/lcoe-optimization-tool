@@ -4,7 +4,10 @@ An interactive tool for calculating and comparing the Levelized Cost of Energy (
 and Natural Gas across all 10 Canadian provinces. Built as part of a personal portfolio demonstrating
 applied energy economics and financial modeling for renewable energy infrastructure.
 
-**[Live Dashboard →](#)** *(link added after deployment)*
+**[Live Dashboard →](#)** *(https://lcoe-optimization-tool.streamlit.app/)*
+
+## Screenshot
+![alt text](image.png)
 
 ---
 
